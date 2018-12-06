@@ -31,7 +31,7 @@ func main() {
 	scanHostComputer()
 
 	//utils.CheckDockerExit()
-	utils.ReadEnvByName("go")
+	utils.ReadEnvByName("DOCKER_API_VERSION")
 	images.GetImagesList()
 }
 

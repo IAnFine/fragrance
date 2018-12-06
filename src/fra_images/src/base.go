@@ -2,12 +2,12 @@ package images
 
 import (
 	"context"
-	"fmt"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
 )
 
-func GetImagesList(){
+func GetImagesList() []types.ImageSummary{
+
 	cli, err := client.NewEnvClient()
 	if err != nil {
 		panic(err)
@@ -18,8 +18,6 @@ func GetImagesList(){
 		panic(err)
 	}
 
-	for _, image := range images {
-		fmt.Println(image.ID)
-	}
+	return images
 }
 

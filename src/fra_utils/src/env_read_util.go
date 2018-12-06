@@ -10,12 +10,12 @@ import (
  */
 
 func ReadEnvByName(name string) string {
-	fmt.Println("getting env %s", name)
+	fmt.Printf("getting env %s \n", name)
 
 	// get env value
 	var env string
-	if env := os.Getenv(name); env == ""{
-		fmt.Println("no %s env can be get",name)
+	if env := os.Getenv(name); env != ""{
+		fmt.Printf("the %s is %s \n",name,env)
 		return env
 	}
 	return env
