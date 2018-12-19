@@ -20,7 +20,7 @@ type SwaggerApiParameter struct {
 	Description string
 	Format      string
 	In          string
-	name        string
+	Name        string
 	Required    bool
 	Type        string
 }
@@ -30,6 +30,8 @@ type SwaggerPathInfo struct {
 	Description string
 	OperationId string
 	Parameters  []*SwaggerApiParameter
+	Tags        []string
+	Summary     string
 }
 
 type SwaggerPath struct {

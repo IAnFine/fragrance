@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"github.com/fragrance/src/fra_utils/src"
 )
@@ -26,75 +27,80 @@ var FRAGRANCE_PROJECT_VERSION string = "1.0.0"
 
 var DEFAULT_CONFIG_PATH string = "../config/config.conf"
 
+var DEFAULT_URL string = "http://ec.singularitychina.com/cw/api/swagger_doc"
+
 /*
   入口函数
 */
 func main() {
-	result, _ := utils.GetSwaggerJson("http://admin.oss999.com:9099/cw/api/swagger_doc")
+	url := flag.String("url", "", "swagger_doc 数据网络地址")
+	u := flag.String("u", "", "swagger_doc 数据网络地址")
+	flag.Parse()
 
-	//fmt.Println(result.Host)
-	//fmt.Println(result.Produces)
-	//fmt.Println(result.Swagger)
-	//fmt.Println(result.Info.Title)
-	//fmt.Println(result.Info.Version)
-	//
-	//fmt.Println("produces items.....")
-	//for _,item := range result.Produces {
-	//	fmt.Println(item)
-	//}
-
-	for v, item := range result.Paths {
-		fmt.Print("url:  ")
-		fmt.Println(v)
-
-		if item.Get.OperationId != "" {
-			fmt.Println("this get request")
-			fmt.Print("Consumes:  ")
-			fmt.Println(item.Get.Consumes)
-			fmt.Print("Description:  ")
-			fmt.Println(item.Get.Description)
-			fmt.Print("OperationId:  ")
-			fmt.Println(item.Get.OperationId)
-			fmt.Println("Parameters:  ")
-			for _, param := range item.Get.Parameters {
-				fmt.Print("    Description:  ")
-				fmt.Println(param.Description)
-				fmt.Print("    Format:  ")
-				fmt.Println(param.Format)
-				fmt.Print("    In:  ")
-				fmt.Println(param.In)
-				fmt.Print("    Required:  ")
-				fmt.Println(param.Required)
-				fmt.Print("    Type:  ")
-				fmt.Println(param.Type)
-			}
-
-		}
-		if item.Post.OperationId != "" {
-			fmt.Println("this post request")
-
-			fmt.Print("Consumes:  ")
-			fmt.Println(item.Post.Consumes)
-			fmt.Print("Description:  ")
-			fmt.Println(item.Post.Description)
-			fmt.Print("OperationId:  ")
-			fmt.Println(item.Post.OperationId)
-			fmt.Println("Parameters:  ")
-			for _, param := range item.Post.Parameters {
-				fmt.Print("    Description:  ")
-				fmt.Println(param.Description)
-				fmt.Print("    Format:  ")
-				fmt.Println(param.Format)
-				fmt.Print("    In:  ")
-				fmt.Println(param.In)
-				fmt.Print("    Required:  ")
-				fmt.Println(param.Required)
-				fmt.Print("    Type:  ")
-				fmt.Println(param.Type)
-			}
-		}
+	var realUrl = DEFAULT_URL
+	if *url != "" {
+		realUrl = *url
 	}
 
+	if *u != "" {
+		realUrl = *u
+	}
+
+	result, _ := utils.GetSwaggerJson(realUrl)
+
+	//for v, item := range result.Paths {
+	//	fmt.Print("url:  ")
+	//	fmt.Println(v)
+	//
+	//	if item.Get.OperationId != "" {
+	//		fmt.Println("this get request")
+	//		fmt.Print("Consumes:  ")
+	//		fmt.Println(item.Get.Consumes)
+	//		fmt.Print("Description:  ")
+	//		fmt.Println(item.Get.Description)
+	//		fmt.Print("OperationId:  ")
+	//		fmt.Println(item.Get.OperationId)
+	//		fmt.Println("Parameters:  ")
+	//		for _, param := range item.Get.Parameters {
+	//			fmt.Print("    Description:  ")
+	//			fmt.Println(param.Description)
+	//			fmt.Print("    Format:  ")
+	//			fmt.Println(param.Format)
+	//			fmt.Print("    In:  ")
+	//			fmt.Println(param.In)
+	//			fmt.Print("    Required:  ")
+	//			fmt.Println(param.Required)
+	//			fmt.Print("    Type:  ")
+	//			fmt.Println(param.Type)
+	//		}
+	//
+	//	}
+	//	if item.Post.OperationId != "" {
+	//		fmt.Println("this post request")
+	//
+	//		fmt.Print("Consumes:  ")
+	//		fmt.Println(item.Post.Consumes)
+	//		fmt.Print("Description:  ")
+	//		fmt.Println(item.Post.Description)
+	//		fmt.Print("OperationId:  ")
+	//		fmt.Println(item.Post.OperationId)
+	//		fmt.Println("Parameters:  ")
+	//		for _, param := range item.Post.Parameters {
+	//			fmt.Print("    Description:  ")
+	//			fmt.Println(param.Description)
+	//			fmt.Print("    Format:  ")
+	//			fmt.Println(param.Format)
+	//			fmt.Print("    In:  ")
+	//			fmt.Println(param.In)
+	//			fmt.Print("    Required:  ")
+	//			fmt.Println(param.Required)
+	//			fmt.Print("    Type:  ")
+	//			fmt.Println(param.Type)
+	//		}
+	//	}
+	//}
+
+	utils.ExportSwaggerJsonToExcel(*result, "api_demo_v2.1.xlsx")
 	//config := flag.String("config","","weather need config")
 	//version := flag.String("version","","weather need config")
 	//
