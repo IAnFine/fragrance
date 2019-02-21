@@ -14,57 +14,6 @@ import (
 // 根据模板规则写入数据
 // 返回结果
 func ExportSwaggerJsonToExcel(json SwaggerJson, src string) {
-	//for v, item := range json.Paths {
-	//	fmt.Print("url:  ")
-	//	fmt.Println(v)
-	//
-	//	if item.Get.OperationId != "" {
-	//		fmt.Println("this get request")
-	//		fmt.Print("Consumes:  ")
-	//		fmt.Println(item.Get.Consumes)
-	//		fmt.Print("Description:  ")
-	//		fmt.Println(item.Get.Description)
-	//		fmt.Print("OperationId:  ")
-	//		fmt.Println(item.Get.OperationId)
-	//		fmt.Println("Parameters:  ")
-	//		for _, param := range item.Get.Parameters {
-	//			fmt.Print("    Description:  ")
-	//			fmt.Println(param.Description)
-	//			fmt.Print("    Format:  ")
-	//			fmt.Println(param.Format)
-	//			fmt.Print("    In:  ")
-	//			fmt.Println(param.In)
-	//			fmt.Print("    Required:  ")
-	//			fmt.Println(param.Required)
-	//			fmt.Print("    Type:  ")
-	//			fmt.Println(param.Type)
-	//		}
-	//
-	//	}
-	//	if item.Post.OperationId != "" {
-	//		fmt.Println("this post request")
-	//
-	//		fmt.Print("Consumes:  ")
-	//		fmt.Println(item.Post.Consumes)
-	//		fmt.Print("Description:  ")
-	//		fmt.Println(item.Post.Description)
-	//		fmt.Print("OperationId:  ")
-	//		fmt.Println(item.Post.OperationId)
-	//		fmt.Println("Parameters:  ")
-	//		for _, param := range item.Post.Parameters {
-	//			fmt.Print("    Description:  ")
-	//			fmt.Println(param.Description)
-	//			fmt.Print("    Format:  ")
-	//			fmt.Println(param.Format)
-	//			fmt.Print("    In:  ")
-	//			fmt.Println(param.In)
-	//			fmt.Print("    Required:  ")
-	//			fmt.Println(param.Required)
-	//			fmt.Print("    Type:  ")
-	//			fmt.Println(param.Type)
-	//		}
-	//	}
-	//}
 	for v, item := range json.Paths {
 		// v 为接口地址
 		// item 为对应key 的值 分为get post 或者还有put delete
