@@ -1,9 +1,8 @@
 package main
 
 import (
-	"flag"
-	"fmt"
-	"github.com/fragrance/src/fra_utils/src"
+	"github.com/fragrance/src/fra_boot"
+	"os/exec"
 )
 
 /*
@@ -16,6 +15,7 @@ import (
    |- fra_db 数据管理
    |- fra_hardware 硬件管理
    |- fra_images  镜像管理
+   |- fra_message  消息管理
    |- fra_services 服务管理
    |- fra_stacks  集群管理
    |- fra_users  用户管理
@@ -25,25 +25,27 @@ import (
 // 项目版本
 var FRAGRANCE_PROJECT_VERSION string = "1.0.0"
 
-var DEFAULT_CONFIG_PATH string = "../config/config.conf"
-
-var DEFAULT_URL string = "http://xxx/cw/api/swagger_doc"
+var DEFAULT_CONFIG_PATH string = "~/config/config.conf"
 
 /*
   入口函数
 */
 func main() {
-	url := flag.String("url", "", "swagger_doc 数据网络地址")
-	flag.Parse()
+	// 初始化项目 加载配置 扫描代码 启动单测
+	boot.Init(DEFAULT_CONFIG_PATH, FRAGRANCE_PROJECT_VERSION)
 
-	var realUrl = DEFAULT_URL
-	if *url != "" {
-		realUrl = *url
-	}
-
-	result, _ := utils.GetSwaggerJson(realUrl)
-
-	utils.ExportSwaggerJsonToExcel(*result, "api_demo_v2.0.xlsx")
+	exec.Command("go", "test")
+	//url := flag.String("url", "", "swagger_doc 数据网络地址")
+	//flag.Parse()
+	//
+	//var realUrl = DEFAULT_URL
+	//if *url != "" {
+	//	realUrl = *url
+	//}
+	//
+	//result, _ := utils.GetSwaggerJson(realUrl)
+	//
+	//utils.ExportSwaggerJsonToExcel(*result, "api_demo_v2.0.xlsx")
 	//config := flag.String("config","","weather need config")
 	//version := flag.String("version","","weather need config")
 	//
@@ -60,48 +62,34 @@ func main() {
 	////utils.CheckDockerExit()
 	//utils.ReadEnvByName("DOCKER_API_VERSION")
 	////images.GetImagesList()
-}
 
-/*
-  读取启动命令行参数
-  命令行参数优先级大于配置文件优先级
-*/
-func readArg() {
+	// 扫描项目是否正常启动，项目启动后首先单元测试
+	//ScanEnvSafe(DEFAULT_CONFIG_PATH)
 
-}
+	//fmt.Println(a)
+	//a = 3
+	//fmt.Println(a)
+	//
+	//resp, err := http.Get("http://127.0.0.1:5700/send_private_msg?user_id=1057885002&message=xxxxxxxxxx")
+	//
+	//if err != nil {
+	//	fmt.Println(err)
+	//	return
+	//}
+	//
+	//defer resp.Body.Close()
+	//body, err := ioutil.ReadAll(resp.Body)
+	//if err != nil {
+	//	fmt.Println(err)
+	//	return
+	//}
+	//
+	//fmt.Println(string(body))
 
-/*
-  读取配置文件
-  默认配置文件地址为空字符串
-*/
-func readConfig(path string) map[string]string {
-	var src = DEFAULT_CONFIG_PATH
-	if path != "" {
-		src = path
-	}
-
-	configMap := utils.InitConfig(src)
-	fmt.Println(configMap)
-	return configMap
-}
-
-/*
-  扫描项目文件
-*/
-func scanProject() {
-
-}
-
-/*
-  检测项目版本
-*/
-func scanVersion() {
-
-}
-
-/*
-  检测宿主机环境
-*/
-func scanHostComputer() {
+	//for i := 0; i < 10; i++ {
+	//	go message.SendPrivateMessage("1057885002",strconv.Itoa(i))
+	//}
+	//
+	//runtime.Gosched()
 
 }

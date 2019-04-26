@@ -7,6 +7,7 @@ import (
 	"io"
 )
 
+// 镜像列表
 func GetImagesList(options types.ImageListOptions) []types.ImageSummary {
 
 	cli, err := client.NewEnvClient()
@@ -22,6 +23,7 @@ func GetImagesList(options types.ImageListOptions) []types.ImageSummary {
 	return images
 }
 
+// 创建镜像
 func CreateImage(parentReference string, options types.ImageCreateOptions) io.ReadCloser {
 	cli, err := client.NewEnvClient()
 	if err != nil {
@@ -35,6 +37,7 @@ func CreateImage(parentReference string, options types.ImageCreateOptions) io.Re
 	return readCloser
 }
 
+// 移除镜像
 func RemoveImage(imageID string, options types.ImageRemoveOptions) []types.ImageDeleteResponseItem {
 	cli, err := client.NewEnvClient()
 	if err != nil {
@@ -48,6 +51,7 @@ func RemoveImage(imageID string, options types.ImageRemoveOptions) []types.Image
 	return items
 }
 
+// 推送镜像
 func PullImage(refStr string, options types.ImagePullOptions) io.ReadCloser {
 	cli, err := client.NewEnvClient()
 	if err != nil {

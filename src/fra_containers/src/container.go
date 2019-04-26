@@ -52,3 +52,18 @@ func MoveContainer(containerID string, options types.ContainerRemoveOptions) boo
 	}
 	return result
 }
+
+// 启动容器
+func StartContainer() {
+
+}
+
+// 获取容器详情
+func GetContainerDetail() {
+
+}
+
+// 扫描容器 查看是否有状态异常的容器
+func ScanContainer() {
+
+}
